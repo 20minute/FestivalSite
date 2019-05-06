@@ -1,0 +1,132 @@
+﻿@model Festival.Models.ControleFestivalier
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Monolit";
+}
+
+<h2>Monolit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>ControleFestivalier</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class='row'>
+            <div class='col-lg-2 '>
+            </div>
+
+            <div class='col-lg-8 col-xs-12'>
+                <div class="text-center">
+                    <h1>Entrez vos coordonnées</h1>
+                </div>
+                <br />
+
+                <div class="row">
+                    <div class='col-lg-6 '>
+                        <label>Nom : </label><br />
+                        <input type="text" required class="form-control" name="Nom">
+                        @Html.ValidationMessageFor(model => model.Nom, "", new { @class = "text-danger" })<br /><br />
+                    </div>
+                    <div class='col-lg-6 '>
+                        <label>Prenom : </label><br />
+                        <input type="text" required class="form-control" name="Prenom">
+                        @Html.ValidationMessageFor(model => model.Prenom, "", new { @class = "text-danger" })<br /><br />
+                    </div>
+                </div>
+                <label>Date de naissance : </label><br />
+                <input type="date" required class="form-control" name="Naissance">
+                @Html.ValidationMessageFor(model => model.Naissance, "", new { @class = "text-danger" })<br /><br />
+                <div class="row">
+                    <div class='col-lg-6 '>
+                        <label>e-mail : </label><br />
+                        <input type="email" required class="form-control" name="Email">
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })<br /><br />
+                    </div>
+                    <div class='col-lg-6 '>
+                        <label>Entrez de nouveau votre e-mail : </label><br />
+                        <input type="email" class="form-control" name="Emailv"><br /><br />
+                        @Html.ValidationMessageFor(model => model.Emailv, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class='col-lg-6 '>
+                        <label>Mot de passe : </label><br />
+                        <input type="password" required class="form-control" name="Mdp">
+                        @Html.ValidationMessageFor(model => model.Mdp, "", new { @class = "text-danger" })<br /><br />
+                    </div>
+                    <div class='col-lg-6 '>
+                        <label>Entrez de nouveau votre mot de passe : </label><br />
+                        <input type="password" class="form-control" name="Mdpv"><br /><br />
+                        @Html.ValidationMessageFor(model => model.Mdpv, "", new { @class = "text-danger" })
+
+                    </div>
+                </div>
+
+                <div class='row'>
+                    <div class='col-lg-2 '>
+                        <label>Homme : </label><br />
+                        <input type="radio" Value="Homme" name="Genre"><br /><br />
+                    </div>
+                    <div class='col-lg-2 '>
+                        <label>Femme : </label><br />
+                        <input type="radio" Value="Femme" name="Genre"><br /><br />
+                    </div>
+                    <div class='col-lg-2 '>
+                        <label>Neutre : </label><br />
+                        <input type="radio" Value="Neutre" name="Genre">
+                    </div>
+                    <div class='col-lg-6 '>
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(model => model.Genre, "", new { @class = "text-danger" })<br /><br />
+
+                <label>Téléphone : </label><br />
+                <input type="tel" pattern="[0-9]{10}" required class="form-control" name="Telephone">
+                @Html.ValidationMessageFor(model => model.Telephone, "", new { @class = "text-danger" })<br /><br />
+
+                <div class="row">
+                    <div class='col-lg-6 '>
+                        <label>Code postal : </label><br />
+                        <input type="tel" pattern="[0-9]{5}" required class="form-control" name="CodePostal">
+                        @Html.ValidationMessageFor(model => model.CodePostal, "", new { @class = "text-danger" })<br /><br />
+                    </div>
+                    <div class='col-lg-6 '>
+                        <label>Ville : </label><br />
+                        <input type="text" required class="form-control" name="Ville">
+                        @Html.ValidationMessageFor(model => model.Ville, "", new { @class = "text-danger" })<br /><br />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class='col-lg-6 '>
+                        <label>Rue : </label><br />
+                        <input type="text" required class="form-control" name="Rue">
+                        @Html.ValidationMessageFor(model => model.Rue, "", new { @class = "text-danger" })<br /><br />
+                    </div>
+                    <div class='col-lg-6 '>
+                        <label>Pays : </label><br />
+                        <input type="text" required class="form-control" name="Pays">
+                        @Html.ValidationMessageFor(model => model.Pays, "", new { @class = "text-danger" })<br /><br />
+                    </div>
+                </div>
+                <br />
+
+                <input type="submit" value="Envoyer" class="btn btn-primary" />
+            </div>
+
+            <div class='col-lg-2 '>
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

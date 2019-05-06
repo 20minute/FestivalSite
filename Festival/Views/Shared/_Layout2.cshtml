@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Mon application ASP.NET</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Festival", "Index2", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Accueil", "Index2", "Home")</li>
+                    <li>@Html.ActionLink("Festivals", "Festivalls", "Home")</li>
+                    @{
+                        HttpCookie cookie1 = Request.Cookies["Login"];
+                        if (cookie1 != null)
+                        {
+                            <li>@Html.ActionLink("Consulter les chiffres de mon festival", "ConsultanChiffre", "Home")</li>
+                            <li>@Html.ActionLink("Personnes intéressées par mon festival", "FreqAtt", "Home")</li>
+                            <li>@Html.ActionLink("Chiffre sur les sélections", "ChiffreSelection", "Home")</li>
+                        }
+                    }
+                </ul>
+                <ul class="nav navbar-right navbar-nav">
+                    @{
+                        HttpCookie cookie2 = Request.Cookies["Nom"];
+                        if (cookie2 != null)
+                        {
+                            <li>@Html.ActionLink("Mes sélections", "Selections", "Home")</li>
+                        }
+                    }
+                    <li>@Html.ActionLink("Deconnexion", "Deconnection", "Home")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Festival site web conçu par Millon-Devigne Hugo</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

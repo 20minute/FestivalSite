@@ -1,0 +1,28 @@
+﻿@model Festival.Models.FestivalsViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+    ViewBag.Title = "ConsultanChiffre";
+}
+
+<h2>Chiffres liés au festival</h2>
+
+<div>
+    <table class="table">
+        <tr>
+            <Th>Nombre de places</Th>
+            <Th>Places vendues</Th>
+            <Th>Nombre d'artistes présents</Th>
+            <Th>Nombre de scènes</Th>
+            <Th>Argent rapporté</Th>
+        </tr>
+
+        <tr>
+            <Td>@ViewData["place"]</Td>
+            <Td>@ViewData["nbFestivaliers"]</Td>
+            <Td>@ViewData["nbArtiste"]</Td>
+            <Td>@ViewData["nbscene"]</Td>
+            <Td>@ViewData["prix"]</Td>
+        </tr>
+    </table>
+</div>

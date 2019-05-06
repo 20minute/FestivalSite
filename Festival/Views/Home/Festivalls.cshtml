@@ -1,0 +1,118 @@
+﻿@model Festival.Models.FestivalsViewModel
+
+@{
+    HttpCookie cookie2 = Request.Cookies["Nom"];
+    HttpCookie cookie3 = Request.Cookies["Login"];
+    if (cookie2 != null || cookie3 != null)
+    {
+        Layout = "~/Views/Shared/_Layout2.cshtml";
+    }
+    ViewBag.Title = "Festivals";
+}
+<h2>@ViewBag.Title</h2>
+
+
+<h3>Liste des festivals disponibles, cliquez sur les fiches pour en savoir plus !</h3>
+<div class="container">
+    <div class="row">
+        @foreach (var festival in Model.Festivals)
+        {
+            <div class="col-md-4">
+                <div class="card card-default">
+                    <a class="card-link" data-toggle="modal" data-target="#@festival.Id">
+                        <span class="card-img">
+                            <img src="http://via.placeholder.com/640x320" class="img-responsive">
+                        </span>
+                        <span class="card-body">
+                            <h3>@festival.Nom</h3>
+                            <p>@festival.Description</p>
+                        </span>
+                    </a>
+                </div>
+            </div>
+            <div id="@festival.Id" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">@festival.Nom</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p><strong>Description : </strong> @festival.Description</p>
+
+
+                            <p><strong>Ville : </strong> @festival.Lieu</p>
+                            <p><strong>Code postal : </strong>  @festival.CodePostal</p>
+                            <p><strong>Prix : </strong>  @festival.Prix €</p>
+
+
+
+                            <p><strong>Date de début : </strong> @festival.DateDebut.ToLongDateString()</p>
+                            <p><strong>Date de fin  : </strong> @festival.DateFin.ToLongDateString()</p>
+                            @{
+                                foreach (var p in ViewData["listPlace"] as List<string>)
+                                {
+                                    var a = p.Split(' ');
+
+                                    string b = a[0];
+                                    string c = a[1];
+                                    string d = a[2];
+
+                                    if (b == Convert.ToString(festival.Id))
+                                    {
+                                        <p>@d places restantes sur @c places</p>
+                                    }
+                                }
+                            }
+                            <a href="#artistes_@festival.Id" class="btn btn-primary" data-toggle="collapse">Liste des groupes</a>
+                            @Html.ActionLink("Intéressé", "Freq", "Home", new { idFestival = festival.Id }, new { area = "", @class = "btn btn-primary" })
+                            <a href="Inscription" class="btn btn-primary">Réserver mes places</a>
+                            <div id="artistes_@festival.Id" class="collapse">
+                                <h4>Artistes présents : </h4>
+                                @foreach (var prog in Model.Programmations)
+                                {
+                                    if (prog.Festival.Id == festival.Id)
+                                    {
+                                        foreach (var artiste in Model.Artistes)
+                                        {
+                                            if (artiste.ArtisteID == prog.ArtisteID)
+                                            {
+                                                <div class="col-md-6">
+                                                    <div class="card card-default">
+                                                        <a class="card-link" data-toggle="modal" data-target="#@artiste.ArtisteID">
+                                                            <span class="card-img">
+                                                                @if (@artiste.Photo == null)
+                                                                {
+                                                                    <img src="http://via.placeholder.com/640x320" class="img-responsive">
+                                                                }
+                                                                else
+                                                                {
+                                                                    <img src="@artiste.Photo" class="img-responsive">
+                                                                }
+                                                            </span>
+                                                            <span class="card-body">
+                                                                <h3>@artiste.ArtisteNom</h3>
+                                                                <p>Style : @artiste.Style</p>
+                                                                @Html.ActionLink("Détails", "ArtisteDetail", "Home", new { id = artiste.ArtisteID }, new { area = "", @class = "btn btn-primary"})
+                                                            </span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            }
+                                        }
+                                    }
+                                }
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        }
+    </div>
+</div>

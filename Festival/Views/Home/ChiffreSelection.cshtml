@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Festival.Models.ChiffreSelections>
+
+@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+    ViewBag.Title = "ChiffreSelection";
+
+    
+        string a = null;
+        foreach (var item in Model)
+        {
+            a = @item.Programmation.Festival.Nom;
+            break;
+        }
+}
+
+<h2>@a</h2>
+
+<div>
+    @{
+        foreach (var item in Model)
+        {
+            <h2>Programmation :</h2>
+            <h3>@item.Programmation.Artiste.ArtisteNom le @item.Programmation.DateDebutConcert.ToShortDateString() de @item.Programmation.DateDebutConcert.ToShortTimeString() à @item.Programmation.DateFinConcert.ToShortTimeString() sur la scène @item.Programmation.Scene.Nom</h3>
+            if (item.nbPersonnePri != 0)
+            {
+                if (item.nbPersonnePri == 1)
+                {
+                    <h4>@item.nbPersonnePri personne a placé cette programmation dans sa sélection primaire</h4>
+                }
+                else
+                {
+                    <h4>@item.nbPersonnePri personnes ont placé cette programmation dans leur sélection primaire</h4>
+                }
+            }
+
+            if (item.nbPersonneSec != 0)
+            {
+                if (item.nbPersonneSec == 1)
+                {
+                    <h4>@item.nbPersonneSec personne a placé cette programmation dans sa sélection secondaire</h4>
+
+                }
+                else
+                {
+                    <h4>@item.nbPersonneSec personnes ont placé cette programmation dans leur sélection secondaire</h4>
+                }
+            }
+            <br />
+        }
+    }
+</div>
+

@@ -1,0 +1,24 @@
+﻿@model Festival.Models.Interet
+
+@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+    ViewBag.Title = "FreqAtt";
+}
+
+<h2>Personnes intéressées par mon festival</h2>
+
+<div>
+    <h3>@Model.Festival.Nom</h3>
+    <hr />
+    <table class="table">
+        <tr>
+            <Th>Personnes intéressées</Th>
+            <Th>Personnes ayant payé leur place</Th>
+        </tr>
+
+        <tr>
+            <Td>@Model.Interesser</Td>
+            <Td>@ViewData["nbFestivaliers"]</Td>
+        </tr>
+    </table>
+</div>
