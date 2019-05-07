@@ -396,9 +396,9 @@ namespace Festival.Controllers
             {
                 //client.BaseAddress = new Uri("http://localhost:52837/api/Festivaliers");
                //client.BaseAddress = new Uri("http://localhost:49356/api/Organisateurs");
-                client.BaseAddress = new Uri("http://localhost:5575/api/Organisateurs/org");
+                client.BaseAddress = new Uri("http://localhost:5575/api/");
 
-                var responseTask = client.GetAsync("organisateurs");
+                var responseTask = client.GetAsync("organisateurs/org");
                 responseTask.Wait();
 
                 var result = responseTask.Result;
